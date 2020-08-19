@@ -1,15 +1,16 @@
 package com.ua.schoolboard.service.model;
 
-import com.ua.schoolboard.persistence.Language;
-import com.ua.schoolboard.persistence.Role;
+
+import com.ua.schoolboard.persistence.model.GroupEntity;
+import com.ua.schoolboard.rest.model.Language;
+import com.ua.schoolboard.rest.model.Role;
 import lombok.Data;
 
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Data
 public class UserBO {
-    private long userId;
+    private Long userId;
     private String name;
     private String surname;
     private String nickname;
@@ -17,8 +18,11 @@ public class UserBO {
     private Date birthDay;
     private String email;
     private String phoneNumber;
-    private Date joinedDate;
-    private Set<Language> languages;
     private Role role;
-    private int balance;
+    private Date joinedDate;
+    private List<RatesBO> rates = new ArrayList<>();
+    private Set<Language> languages = new HashSet<>();
+    private BalanceBO balance;
+    //private List<GroupBO> groups;
+    private boolean active;
 }

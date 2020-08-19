@@ -1,30 +1,31 @@
 package com.ua.schoolboard.persistence.model;
 
-import com.ua.schoolboard.persistence.Language;
-import com.ua.schoolboard.persistence.Role;
+
+import com.ua.schoolboard.rest.model.Language;
+import com.ua.schoolboard.rest.model.Role;
 import lombok.Data;
 
+
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Data
-@Entity(name = "user")
+@Entity(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long userId;
+    private Long userId;
 
-    @Column(nullable = false)
+    @Column
     private String name;
 
-    @Column(nullable = false)
+    @Column
     private String surname;
 
     @Column
     private String nickname;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
     @Column
@@ -39,13 +40,26 @@ public class UserEntity {
     @Column
     private Date joinedDate;
 
-   /*@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private Set<Language> languages;
-*/
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_lang", joinColumns = @JoinColumn(name = "user_id"),foreignKey = @ForeignKey(name = "fk_user_lang"))
+    @Column(name = "lang")
     @Enumerated(EnumType.STRING)
+    private Set<Language> languages = new HashSet<>();
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Role role;
 
+
+    @ManyToMany
+    private List<RatesEntity> rates = new ArrayList<>();
+
     @Column
-    private int balance;//salary for teachers, balance for students
+    private boolean active;
+
+   @Embedded
+    private BalanceEntity balance;
+
+
 
 }

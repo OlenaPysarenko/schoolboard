@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+Assign Teacher to Rates
+<form action="#" th:action="@{'/assignTeacher2Rates/' + ${user.userId}}" method="post">
+    <div>
+        <table border="thick">
+            <tr>
+                <td><select name="name"/>
+                    <option th:each="user:${users}" th:value="${user.getName()}" th:text="${user.getName()}"></option>
+                    </select> </td>
+                <td><select name="surname"/>
+                    <option th:each="user:${users}"  th:value="${user.getSurname()}"
+                            th:text="${user.getSurname()}"></option>
+                    </select> </td>
+                <!--input type="hidden" th:value="${user.getUserId()}" name="userId"/-->
+                <td><select name="language"/>
+                    <option th:each="rate:${rates}" th:value="${rate.getLanguage()}"
+                            th:text="${rate.getLanguage()}"></option>
+                    </select>
+                </td>
+                <!--td><select name="rateDescription"/>
+                    <option th:each="rate:${rates}" th:value="${rate.getRateDescription()}"
+                            th:text="${rate.getRateDescription()}"></option>
+                    </select>
+                </td-->
+            </tr>
+        </table>
+    </div>
+    <div><input type="submit"/></div>
+</body>
+</html>

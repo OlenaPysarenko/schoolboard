@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+Create New Group
+<form action="#" th:action="@{'/group/'+${user.userId}}" method="post">
+    <div><label> Name of the group <input type="text" name="groupName"/></label></div>
+    <div><label>Select type of the group
+        <select name="groupType">
+            <option th:each="groupType : ${groupTypes}" th:value="${groupType}" th:text="${groupType}"></option>
+        </select></label></div>
+    <div>Select language
+        <select name="language">
+            <option th:each="language : ${languages}" th:value="${language}" th:text="${language}"></option>
+        </select></div>
+    <div>Select Level
+        <select name="lvl">
+            <option th:each="level : ${levels}" th:value="${level}" th:text="${level}"></option>
+        </select></div>
+    <div><label> Name of the book <input type="text" name="bookName"/></label></div>
+    <button type="submit">Save</button>
+</body>
+</html>

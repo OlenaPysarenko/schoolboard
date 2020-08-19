@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+Classes
+<form action="#" th:action="@{'/classes'+${user.userId}+'/'+${groupId}}" method="post">
+    <a th:href="@{'/addClass/'+${user.userId}+'/'+${groupId}}">Add new class</a>
+<div>
+    <table border="thick">
+        <tr th:each="class: ${classes}" th:unless="${#lists.isEmpty(classes)}">
+            <td th:text="${class.getGroup().getGroupName()}"></td>
+            <td th:text="${class.getTeacher().getName()}+' '+ ${class.getTeacher().getSurname()}"></td>
+            <td th:text="${class.getClassesCovered()}"></td>
+            <td th:text="${class.getClassDate()}"></td>
+            <td th:text="${class.getStudents().size()}"></td>
+            <td><a th:href="@{'/classEdit/' + ${user.getUserId()}+'/'+${class.getClassId()}}"> EDIT </a></td>
+            <td><a th:href="@{'/deleteClass/' + ${user.getUserId()}+'/'+${class.getClassId()}}"> Delete </a></td>
+        </tr>
+    </table>
+</div>
+</form>
+</body>
+</html>

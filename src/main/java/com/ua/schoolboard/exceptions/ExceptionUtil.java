@@ -8,8 +8,7 @@ public class ExceptionUtil {
     }
 
     public static CustomException getException(ErrorCode errorCode) {
-        return CustomException
-                .builder()
+        return CustomException.builder()
                 .errorCode(errorCode)
                 .build();
     }

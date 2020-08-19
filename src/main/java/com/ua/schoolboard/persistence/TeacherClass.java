@@ -1,7 +1,7 @@
 package com.ua.schoolboard.persistence;
 
-import java.util.List;
+import com.ua.schoolboard.service.model.ClassSessionBO;
 
-public class TeacherClass extends ClassSession {
+public class TeacherClass extends ClassSessionBO {
    //List<Student> presentStudents;
 }

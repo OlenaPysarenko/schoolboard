@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="EN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+<ul class="list-group">
+    <li class="list-group-item" th:if="${user.role eq student}"><a th:href="@{'/user/studentEdit/'+${user.userId}}">Edit my profile </a></li>
+    <li class="list-group-item" th:if="${user.role eq teacher}"><a th:href="@{'/user/teacherEdit/'+${user.userId}}">Edit my Teacher profile </a></li>
+    <li class="list-group-item" th:if="${user.role eq admin}"><a th:href="@{'/user/adminEdit/'+${user.userId}}">Edit My Admin Profile</a></li>
+    <li class="list-group-item" th:if="${user.role eq admin}"><a th:href="@{'/rates/'+${user.userId}}"> Set Rates for Student </a></li>
+    <li class="list-group-item" th:if="${user.role eq admin}"><a th:href="@{'/teacherRates/'+${user.userId}}"> Set Rates for Teacher </a></li>
+    <li class="list-group-item" th:if="${user.role eq admin}"><a th:href="@{'/allGroups/'+${user.userId}}"> See all groups </a></li>
+    <li class="list-group-item" th:if="${user.role eq student}"><a th:href="@{'/group/'+${user.userId}}">My Group</a></li>
+    <li class="list-group-item" th:if="${user.role eq admin}"><a th:href="@{'/assignUser2Group/' + ${user.userId}}"> Assign Student to Group </a></li>
+    <li class="list-group-item" th:if="${user.role eq admin}"><a th:href="@{'/assign2Rates/'+${user.userId}}"> Assign Student to rates</a></li>
+    <li class="list-group-item" th:if="${user.role eq admin}"><a th:href="@{'/assignTeacher2Rates/'+${user.userId}}"> Assign Teacher to rates</a></li>
+    <li class="list-group-item" th:if="${user.role eq teacher}"><a th:href="@{'/room/'+${user.userId}}"> Teacher's room </a></li>
+    <li class="list-group-item" th:if="${user.role eq admin}"><a th:href="@{'/adminRoom/'+${user.userId}}"> Admin's room </a></li>
+</ul>
+<!--form action=# th:action="@{/registration}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form-->
+<a th:href="@{/login}">Sign out</a>
+</body>
+</html>

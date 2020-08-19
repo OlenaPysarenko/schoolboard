@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+Assign Student to Group
+<form action="#" th:action="@{'/assignUser2Group/' + ${user.userId}}" method="post">
+    <div>
+        <table border="thick">
+            <tr>
+                <td><select name="name"/>
+                    <option th:each="user:${users}" th:value="${user.getName()}" th:text="${user.getName()}"></option>
+                    </select> </td>
+                <td><select name="surname"/>
+                    <option th:each="user:${users}"  th:value="${user.getSurname()}"
+                            th:text="${user.getSurname()}"></option>
+                    </select> </td>
+                <td><select name="language">
+                    <option th:each="language : ${languages}" th:value="${language}" th:text="${language}"></option>
+                </select>
+                </td>
+                <td><select name="groupName"/>
+                    <option th:each="group:${groups}" th:value="${group.getGroupName()}"
+                            th:text="${group.getGroupName()}"></option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div><input type="submit"/></div>
+</body>
+</html>

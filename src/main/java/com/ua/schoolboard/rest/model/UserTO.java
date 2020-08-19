@@ -1,13 +1,18 @@
 package com.ua.schoolboard.rest.model;
 
-import com.ua.schoolboard.persistence.Role;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.util.Date;
+
 @Data
+@EqualsAndHashCode
 public class UserTO {
-    private long userId;
-    private String name;
-    private String surname;
+    private Long userId;
     private String password;
     private String email;
     private Role role;
+    private Date joinedDate;
+    private boolean active;
+
 }

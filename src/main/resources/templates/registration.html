@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
+<!--div class="d-flex justify-content-center align-items-center" style="height:100px;">
+    <div class="bg-primary"></div-->
+<div class="text-center">
 Add new user
-<form action="#"
-      th:action="@{/registration}" method="post">
-    <div><label> Email: <input type="email" name="email" placeholder="email"/> </label></div></div>
+<form action="#" th:action="@{/registration}" method="post">
+    <div><label> Email: <input type="email" name="email" placeholder="email"/> </label></div>
     <div><label> Password: <input type="password" name="password" placeholder="enter your password"/> </label></div>
     <div>
         <select name="role">
@@ -16,8 +20,17 @@ Add new user
         </select>
     </div>
     <div><input type="submit" value="Register"/></div>
+    <!--div th:if="${errors!=null}">
+        <div th:if="${!errors.isEmpty()}">
+            <table>
+                <tr th:each="error : ${errors.values()}">
+                    <td th:text="${error}"></td>
+                </tr>
+            </table>
+        </div>
+    </div-->
 </form>
-<a href="/main">Back to Main Page</a>
+<a href="/login">Login</a>
+</div>
 </body>
-
 </html>

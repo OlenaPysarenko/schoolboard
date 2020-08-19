@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+Edit your profile
+<form action="#" th:action="@{/user/studentEdit}"  method="post">
+    <div><label> Name <input type="text" th:value="${updUser.name}" name="name"/></label></div>
+    <input type="hidden" th:value="${userId}" name="userId"/>
+    <div><label> Password<input type="text" th:value="${updUser.getPassword()}" name="password"/></label></div>
+    <div><label> Surname<input type="text" th:value="${updUser.getSurname()}" name="surname"/></label></div>
+    <div><label> Nickname <input type="text" th:value="${updUser.getNickname()}" name="nickname"/></label></div>
+    <div><label> Birthday<input type="text" th:value="${updUser.getBirthDay()}" name="birthday"/></label></div>
+    <div><label> Phone Number <input type="text" th:value="${updUser.getPhoneNumber()}" name="phoneNumber" placeholder="380(**)-***-**-**"/></label></div>
+    <select name="languages"  multiple="multiple">
+        <option th:each="lang : ${languages}"
+                th:value="${{lang}}"
+                th:text="${lang}"/>
+    </select>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

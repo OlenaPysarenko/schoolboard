@@ -1,6 +1,8 @@
 package com.ua.schoolboard.persistence;
 
-public class StudentClass extends ClassSession {
+import com.ua.schoolboard.service.model.ClassSessionBO;
+
+public class StudentClass extends ClassSessionBO {
     private boolean isPresent;
     private String feedback;
 }

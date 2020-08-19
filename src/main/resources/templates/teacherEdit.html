@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css"
+          rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+Edit your profile
+<form action="#" th:action="@{'/user/teacherEdit/'}" method="post">
+    <input type="hidden" th:value="${userId}" name="userId">
+    <div><label>Teacher's Name <input type="text" th:value="${updUser.getName()}" name="name"/></label></div>
+    <div><label>Teacher's Surname<input type="text" th:value="${updUser.getSurname()}" name="surname"/></label></div>
+    <div><label>Password<input type="text" th:value="${updUser.getPassword()}" name="password"/></label></div>
+    <div><label>Nickname<input type="text" th:value="${updUser.getNickname()}" name="nickname"/></label></div>
+    Birthday
+    <div class="row" style="padding-top: 100px">
+        <div class="col">
+            <input data-date-format="dd/mm/yyyy" th:value="${updUser.getBirthDay()}" name="birthDay" id="datepicker">
+        </div>
+    </div>
+    <div><label>Phone number<input type="text" th:value="${updUser.getPhoneNumber()}" name="phoneNumber"
+                                   placeholder="380(**)-***-**-**"/></label></div>
+    <div>Language(s)
+        <select name="languages" class="form-control" th:field="*{languages}" multiple="multiple">
+            <option th:each="lang : ${languages}"
+                    th:selected="${updUser.getLanguages().contains(lang)}"
+                    th:value="${{lang}}"
+                    th:text="${lang}"></option>
+        </select></div>
+    <button type="submit">Save</button>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $('#datepicker').datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+    });
+    $('#datepicker').datepicker("setDate", new Date());
+</script>
+</body>
+</html>
+

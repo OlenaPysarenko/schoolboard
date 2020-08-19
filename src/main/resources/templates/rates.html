@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+Set Rates for Students
+<form action="#" th:action="@{'/rates/' + ${user.userId}}" method="post">
+    <div>Select language
+        <select name="language">
+            <option th:each="language : ${languages}" th:value="${language}" th:text="${language}"></option>
+        </select></div>
+    <div> Select role
+        <select name="role">
+            <option th:each="role : ${roles}" th:value="${role}" th:text="${role}"></option>
+        </select>
+    </div>
+    <div><label> Rate Description  <input type="text" name="rateDescription"/></label></div>
+    <div><label> Individual Rate   <input type="text" name="indRate"/></label></div>
+    <div><label> Group rate   <input type="text" name="groupRate"/></label></div>
+    <button type="submit">Save Rates</button>
+</form>
+</body>
+</html>
