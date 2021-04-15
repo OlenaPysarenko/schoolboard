@@ -31,12 +31,13 @@ Edit your profile
     <div><label>Phone number<input type="text" th:value="${updUser.getPhoneNumber()}" name="phoneNumber"
                                    placeholder="380(**)-***-**-**"/></label></div>
     <div>Language(s)
-        <select name="languages" class="form-control" th:field="*{languages}" multiple="multiple">
+        <select name="languages" class="form-control"  multiple="multiple">
             <option th:each="lang : ${languages}"
                     th:selected="${updUser.getLanguages().contains(lang)}"
                     th:value="${{lang}}"
                     th:text="${lang}"></option>
         </select></div>
+       </div>
     <button type="submit">Save</button>
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

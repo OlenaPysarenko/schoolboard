@@ -11,10 +11,10 @@ public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long paymentId;
-
     @OneToOne
-    private UserEntity user;
-
+    private UserEntity userFrom;
+    @OneToOne
+    private UserEntity userTo;
     @Column
     private Date date;
     @Column

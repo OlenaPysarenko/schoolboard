@@ -10,16 +10,26 @@
 My Room
 <form action="#" th:action="@{'/room/'+${user.userId}}" method="post"></form>
 <div>
+    <!--table border="thick"-->
     <table border="thick">
         <tr th:each="group: ${groups}">
             <td th:text="${group.getGroupName()}"></td>
             <td th:text="${group.getLanguage()}"></td>
             <td th:text="${group.getLvl()}"></td>
-            <td><a th:href="@{'/classes/'+${user.userId}+'/'+${group.getGroupId()}}"> View Classes </a></td>
-            <td><a th:href="@{'/groupEdit/' + ${user.getUserId()}+'/'+${group.getGroupId()}}"> EDIT </a></td>
-            <td><a th:href="@{'/disableGroup/' + ${user.getUserId()}+'/'+${group.getGroupId()}}"> Disable </a></td>
+            <td th:if="${group.isActive()}"> <a th:href="@{'/classes/'+${user.userId}+'/'+${group.groupId}}"> View Classes </a></td>
+            <td th:if="${group.isActive()}"> <a th:href="@{'/groupEdit/' + ${user.getUserId()}+'/'+${group.getGroupId()}}"> EDIT </a></td>
+            <td th:if="${group.isActive()}"> <a th:href="@{'/disableGroup/' + ${user.getUserId()}+'/'+${group.getGroupId()}}"> Disable </a></td>
+            <td th:if="${!group.isActive()}">Group no longer exists </td>
         </tr>
     </table>
 </div>
+        <!--ul th:each="group: ${groups}">
+            <li th:text="${group.getGroupName()}+' '+${group.getLanguage()}+' '+${group.getLvl()}"} >
+                <a th:href="@{'/classes/'+${user.userId}+'/'+${group.groupId}}"> View Classes </a>
+                <a th:href="@{'/groupEdit/' + ${user.getUserId()}+'/'+${group.getGroupId()}}"> EDIT </a>
+                <a th:if="${group.isActive()}" th:href="@{'/disableGroup/' + ${user.getUserId()}+'/'+${group.getGroupId()}}"> Disable </a>
+                <span th:unless="${!group.isActive()}"> Group no longer exists </span>
+            </li>
+        </ul-->
 </body>
 </html>

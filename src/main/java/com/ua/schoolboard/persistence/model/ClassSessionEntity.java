@@ -1,7 +1,5 @@
 package com.ua.schoolboard.persistence.model;
 
-import com.ua.schoolboard.persistence.Hometask;
-import com.ua.schoolboard.service.model.GroupBO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,7 +13,9 @@ public class ClassSessionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long classId;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "group_id")
     private GroupEntity group;
     @ManyToOne
     private UserEntity teacher;
@@ -28,4 +28,16 @@ public class ClassSessionEntity {
     @Column
     private String hometask;
 
+    @Override
+    public String toString() {
+        return "ClassSessionEntity{" +
+                "classId=" + classId +
+                ", group=" + group +
+                ", teacher=" + teacher +
+                ", students=" + students +
+                ", classesCovered=" + classesCovered +
+                ", classDate=" + classDate +
+                ", hometask='" + hometask + '\'' +
+                '}';
+    }
 }

@@ -29,6 +29,4 @@ public interface UserPersistMapper {
 
     List<UserBO> toUserBOs(List<UserEntity> source);
 
-    @Mapping(target = "user", ignore = true)
-    PaymentBO toPaymentBO(PaymentEntity source);
 }

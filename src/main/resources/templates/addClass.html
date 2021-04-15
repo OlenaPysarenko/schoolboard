@@ -8,38 +8,21 @@
 </head>
 <body>
 Add new class
-<form action="#" th:action="@{'/addClass/'+${user.userId}+'/'+${groupId}}" th:object="${classTO}" method="post">
+<form action="#" th:action="@{'/addClass/'+${user.userId}+'/'+${groupId}}"  method="post">
     <div>Group Name <label th:text="${group.getGroupName()}"></label></div>
     <div>Teacher <label th:text="${user.getName()}+' '+ ${user.getSurname()}"></label></div>
-    <select id="students" name="students"  multiple="multiple">
-        <option th:each="student:${students}"
-                th:field="*{students}"
-                th:value ="${student}" th:text="${student.getName()}+' '+ ${student.getSurname()}">
-        </option>
-    </select>
-    <!--select id="students" name="students" multiple="multiple">
-        <option th:each="student, iterator : ${studentsList}"
-                th:value="${studentsList[__${iterator.index}__]}"
-                th:text="${studentsList[__${iterator.index}__].name} +' '+ ${studentsList[__${iterator.index}__].surname}">
-        </option-->
-        <div>Classes covered <label th:text="${group.getClassesCovered().size()}"/></label></div>
-        <div><label> Task <input type="text" name="hometask"/></label></div>
-        <!--input type="text" name="url" th:value="'/addClass/'+${user.userId}+'/'+${groupId}"-->
-        <button type="submit">Create</button>
+    <div>
+        <table>
+            <tr th:each="student:${students}">
+                <td th:text="${student.getName()}+' '+ ${student.getSurname()}"></td>
+                <td><label>
+                    <input  hidden th:value="${user.getUserId()}" name="userId">
+                </label><a th:href="@{'/checkStudent/'+${user.getUserId()}+'/'+${group.getGroupId()} +'/'+${student.getUserId()}}"> Present </a></td>
+        </table>
+    <div>Classes covered <label th:text="${group.getClassesCovered().size()}"></label></div>
+    <div><label> Task <input type="text" name="hometask"/></label></div>
+    <button type="submit">Submit</button>
 </form>
 </body>
 </html>
-<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $('form').submit(e => {
-        e.preventDefault()
-        const data = $('form').serializeArray()
-        console.log(data)
-        const studentsIds = data
-            .filter(item => item.name === 'students')
-            .map(item => item.value)
-        const hometask = data.find(item => item.name === 'hometask').value
-        const url = data.find(item => item.name === 'url').value
-        $.ajax({ url,method:'post', data:{studentsIds,hometask} })
-    })
-</script-->
+

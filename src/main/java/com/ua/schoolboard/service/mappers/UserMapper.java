@@ -1,17 +1,18 @@
 package com.ua.schoolboard.service.mappers;
 
-import com.ua.schoolboard.rest.model.*;
+import com.ua.schoolboard.rest.model.UpdateAdminTO;
+import com.ua.schoolboard.rest.model.UpdateStudentTO;
+import com.ua.schoolboard.rest.model.UpdateTeacherTO;
+import com.ua.schoolboard.rest.model.UserTO;
 import com.ua.schoolboard.service.model.GroupBO;
-import com.ua.schoolboard.service.model.RatesBO;
 import com.ua.schoolboard.service.model.UserBO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.NullValueMappingStrategy;
 
 import java.util.List;
 
 
-@Mapper(componentModel = "spring", uses = PaymentMapper.class)
+@Mapper(componentModel = "spring")
 public interface UserMapper {
     UserTO toUserTO(UserBO source);
 
@@ -44,6 +45,8 @@ public interface UserMapper {
     List<UpdateTeacherTO> toTeacherTOs(List<UserBO> source);
 
     List<UpdateStudentTO> toStudentTOs(List<UserBO> source);
+
+   // List<UserTO> toUserTOs(List<UserBO>source);
 
     @Mapping(target = "role", ignore = true)
     @Mapping(target = "joinedDate", ignore = true)

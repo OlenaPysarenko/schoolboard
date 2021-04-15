@@ -1,0 +1,17 @@
+@startuml
+actor Admin
+actor School
+entity Service
+database Db
+
+Admin->Service+:create Payment
+
+Service->Db: register Payment
+
+School->Service+: change amount\n in SchoolBalance
+
+Service->Db+: update SchoolBalance
+return amount was changed
+return amount is altered
+return Payment created
+@enduml

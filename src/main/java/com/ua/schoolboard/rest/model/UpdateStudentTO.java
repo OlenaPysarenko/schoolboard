@@ -13,14 +13,13 @@ public class UpdateStudentTO extends UserTO {
     private String name;
     private String surname;
     private String nickname;
-    private String birthDay;
+    private Date birthDay;
     private String phoneNumber;
     private Set<Language> languages = new HashSet<>();
     private BalanceTO balance;
     private List<RatesTO> rates = new ArrayList<>();
     private boolean active;
 
-    //todo get rid of the workaround!!!
     public void updateBalance(Integer sum, Integer classesCovered) {
         BalanceTO balance = this.getBalance();
         if (balance == null) {
@@ -28,12 +27,7 @@ public class UpdateStudentTO extends UserTO {
         }
         balance.setAmount(balance.getAmount() + sum);
         balance.setClassesPaid(balance.getClassesPaid() + classesCovered);
+        this.setBalance(balance);
         //balance.getPayments().add(balance.createPayment(this,sum));
-    }
-
-    public UpdateStudentTO() {
-        this.balance = new BalanceTO();
-        this.languages = new HashSet<>();
-        this.rates = new ArrayList<>();
     }
 }

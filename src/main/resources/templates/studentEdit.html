@@ -8,20 +8,44 @@
 </head>
 <body>
 Edit your profile
-<form action="#" th:action="@{/user/studentEdit}"  method="post">
+<form action="#" th:action="@{/user/studentEdit}" method="post">
     <div><label> Name <input type="text" th:value="${updUser.name}" name="name"/></label></div>
     <input type="hidden" th:value="${userId}" name="userId"/>
     <div><label> Password<input type="text" th:value="${updUser.getPassword()}" name="password"/></label></div>
     <div><label> Surname<input type="text" th:value="${updUser.getSurname()}" name="surname"/></label></div>
     <div><label> Nickname <input type="text" th:value="${updUser.getNickname()}" name="nickname"/></label></div>
-    <div><label> Birthday<input type="text" th:value="${updUser.getBirthDay()}" name="birthday"/></label></div>
-    <div><label> Phone Number <input type="text" th:value="${updUser.getPhoneNumber()}" name="phoneNumber" placeholder="380(**)-***-**-**"/></label></div>
-    <select name="languages"  multiple="multiple">
-        <option th:each="lang : ${languages}"
-                th:value="${{lang}}"
-                th:text="${lang}"/>
-    </select>
+    Birthday
+    <div class="row" style="padding-top: 100px">
+        <div class="col">
+            <input data-date-format="dd/mm/yyyy" th:value="${updUser.getBirthDay()}" name="birthDay" id="datepicker">
+        </div>
+    </div>
+    <div><label> Phone Number <input type="text" th:value="${updUser.getPhoneNumber()}" name="phoneNumber"
+                                     placeholder="380(**)-***-**-**"/></label></div>
+    <div>Classes paid<label th:unless="${updUser.getBalance()== null}"
+                            th:text="${updUser.getBalance().getClassesPaid()}"></label></div>
+    <div>Languages
+        <select name="languages" multiple="multiple">
+            <option th:each="lang : ${languages}"
+                    th:value="${{lang}}"
+                    th:text="${lang}"/>
+        </select>
+    </div>
     <button type="submit">Save</button>
 </form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $('#datepicker').datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+    });
+    $('#datepicker').datepicker("setDate", new Date());
+</script>
 </body>
 </html>

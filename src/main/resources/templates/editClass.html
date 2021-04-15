@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="EN"><head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Edit class
+<form action="#" th:action="@{'/editClass/'+${user.userId}+'/'+${group.getGroupId()}+'/'+${class.getClassId()}}"  method="post">
+    <div>Group Name <label th:text="${group.getGroupName()}"></label></div>
+    <div>Teacher <label th:text="${user.getName()}+' '+ ${user.getSurname()}"></label></div>
+    <div>Students present
+        <table>
+            <tr th:each="student:${students}">
+                <td th:text="${student.getName()}+' '+ ${student.getSurname()}"></td>
+                <td><label>
+                    <input  hidden th:value="${user.getUserId()}" name="userId">
+                </label><a th:href="@{'/editStudents/'+${user.getUserId()}+'/'+${group.getGroupId()} +'/'+${class.getClassId()}+'/'+${student.getUserId()}}"> Present </a></td>
+        </table>
+        <div>Classes covered <input type="text" th:value="${group.getClassesCovered().size()}"/></label></div>
+        <div>Task <input type="text"  th:value="${class.getHometask()}" name="hometask"/></div>
+        <button type="submit">Submit</button>
+</form>
+</body>
+</html>

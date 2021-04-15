@@ -1,7 +1,9 @@
 package com.ua.schoolboard.rest.controllers;
 
+import com.ua.schoolboard.exceptions.CustomException;
 import com.ua.schoolboard.rest.model.Role;
 import com.ua.schoolboard.rest.model.UserTO;
+import com.ua.schoolboard.service.services.CustomExceptionResolver;
 import com.ua.schoolboard.service.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,9 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 public class RegistrationController {
-
     private final UserService userService;
+    private final CustomExceptionResolver resolver;
 
-    // @RolesAllowed({"ADMIN"})
     @GetMapping("/registration")
     public String registerUser(Model model) {
         model.addAttribute("roles", Role.values());
@@ -28,13 +29,13 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@Valid UserTO user, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "registration";
-        }
+    public String addUser(@Valid UserTO user, Model model) {
 
-        userService.register(user);
-       // model.addAttribute("users", userService.getAll());
+        try {
+            userService.register(user);
+        } catch (CustomException e) {
+          resolver.resolveError(model, "registration",e);
+        }
         return "login";
     }
 }

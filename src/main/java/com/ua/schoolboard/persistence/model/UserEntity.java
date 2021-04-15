@@ -51,7 +51,7 @@ public class UserEntity {
     private Role role;
 
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<RatesEntity> rates = new ArrayList<>();
 
     @Column
@@ -59,7 +59,6 @@ public class UserEntity {
 
    @Embedded
     private BalanceEntity balance;
-
-
+   
 
 }

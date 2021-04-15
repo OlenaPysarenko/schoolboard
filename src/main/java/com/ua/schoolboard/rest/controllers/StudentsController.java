@@ -27,11 +27,6 @@ public class StudentsController {
             this.userService = userService;
         }
 
-        @Override
-        public void setAsText(String studentId) {
-            final UpdateStudentTO student = userService.getStudent(Long.parseLong(studentId));
-            setValue(student);
-        }
 
         @Override
         public String getAsText() {

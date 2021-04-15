@@ -10,19 +10,26 @@
 Classes
 <form action="#" th:action="@{'/classes'+${user.userId}+'/'+${groupId}}" method="post">
     <a th:href="@{'/addClass/'+${user.userId}+'/'+${groupId}}">Add new class</a>
-<div>
-    <table border="thick">
-        <tr th:each="class: ${classes}" th:unless="${#lists.isEmpty(classes)}">
-            <td th:text="${class.getGroup().getGroupName()}"></td>
-            <td th:text="${class.getTeacher().getName()}+' '+ ${class.getTeacher().getSurname()}"></td>
-            <td th:text="${class.getClassesCovered()}"></td>
-            <td th:text="${class.getClassDate()}"></td>
-            <td th:text="${class.getStudents().size()}"></td>
-            <td><a th:href="@{'/classEdit/' + ${user.getUserId()}+'/'+${class.getClassId()}}"> EDIT </a></td>
-            <td><a th:href="@{'/deleteClass/' + ${user.getUserId()}+'/'+${class.getClassId()}}"> Delete </a></td>
-        </tr>
-    </table>
-</div>
+    <div>
+        <table border="thick">
+            <th> Group Name</th>
+            <th> Teacher</th>
+            <th> Classes covered</th>
+            <th> Date</th>
+            <th> Students present </th>
+            <th> Hometask</th>
+            <th> Edit class </th>
+            <tr th:each="class: ${classes}" th:unless="${#lists.isEmpty(classes)}">
+                <td th:text="${class.getGroup().getGroupName()}"></td>
+                <td th:text="${class.getTeacher().getName()}+' '+ ${class.getTeacher().getSurname()}"></td>
+                <td th:text="${class.getClassesCovered()}"></td>
+                <td th:text="${class.getClassDate().getDate()}+'.'+${class.getClassDate().getMonth()}"></td>
+                <td th:text="${class.getStudents().size()}"></td>
+                <td th:text="${class.getHometask()}"></td>
+                <td><a th:href="@{'/editClass/'+${user.userId}+'/'+${groupId}+'/'+${class.getClassId()}}"> EDIT </a></td>
+            </tr>
+        </table>
+    </div>
 </form>
 </body>
 </html>

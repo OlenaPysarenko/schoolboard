@@ -9,11 +9,15 @@
 <body>
 Add payment
 <form action="#" th:action="@{'/newPayment/'+${user.userId}}" method="post">
-    <select name="studentId"/>
-    <option th:each="student:${students}" th:value="${student.getUserId()}"
-            th:text="${student.getName()}+' '+ ${student.getSurname()}"/>
-    </select>
-    <label> Enter amount <input type="text" name="sum"/></label>
+    <input type="hidden" th:value="${user.getUserId()}" name="userId">
+    <div><label> From </label>
+        <select name="userFrom"/>
+        <option th:each="student:${usersFrom}" th:value="${student.getUserId()}"
+                th:text="${student.getName()}+' '+ ${student.getSurname()}"/>
+        </select></div>
+    <div>
+        <label> To School </label>
+        <label> Enter amount <input type="text" name="sum"/></label></div>
     <button type="submit">Submit</button>
 </form>
 </body>

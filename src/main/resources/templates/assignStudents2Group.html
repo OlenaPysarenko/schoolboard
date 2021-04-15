@@ -12,13 +12,12 @@ Assign Student to Group
     <div>
         <table border="thick">
             <tr>
-                <td><select name="name"/>
-                    <option th:each="user:${users}" th:value="${user.getName()}" th:text="${user.getName()}"></option>
-                    </select> </td>
-                <td><select name="surname"/>
-                    <option th:each="user:${users}"  th:value="${user.getSurname()}"
-                            th:text="${user.getSurname()}"></option>
-                    </select> </td>
+                <div>
+                    <select name="studentId"/>
+                    <option th:each="student:${students}" th:value="${student.getUserId()}"
+                            th:text="${student.getName()}+' '+ ${student.getSurname()}"/>
+                    </select>
+                </div>
                 <td><select name="language">
                     <option th:each="language : ${languages}" th:value="${language}" th:text="${language}"></option>
                 </select>

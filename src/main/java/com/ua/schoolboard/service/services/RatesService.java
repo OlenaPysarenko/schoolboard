@@ -1,5 +1,6 @@
 package com.ua.schoolboard.service.services;
 
+import com.ua.schoolboard.exceptions.CustomException;
 import com.ua.schoolboard.persistence.repos.RatesRepository;
 import com.ua.schoolboard.rest.model.*;
 import com.ua.schoolboard.service.mappers.RatesMapper;
@@ -35,7 +36,7 @@ public class RatesService {
         return ratesMapper.toRatesTOs(allRates);
     }
 
-    public RatesTO getByLangAndDescription(Language language, String rateDescription) {
+    public RatesTO getByLangAndDescription(Language language, String rateDescription) throws CustomException {
         RatesBO ratesBO = ratesRepository.findByLangAndDescription(language, rateDescription);
         return ratesMapper.toRatesTO(ratesBO);
     }
@@ -56,7 +57,7 @@ public class RatesService {
 
     }
 
-    public RatesTO getByRoleAndLang(Role role, Language language){
+    public RatesTO getByRoleAndLang(Role role, Language language) throws CustomException {
         RatesBO byRoleAndLang = ratesRepository.getByRoleAndLang(role, language);
         return ratesMapper.toRatesTO(byRoleAndLang);
     }

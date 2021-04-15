@@ -1,5 +1,6 @@
 package com.ua.schoolboard.service.services;
 
+import com.ua.schoolboard.exceptions.CustomException;
 import com.ua.schoolboard.persistence.repos.GroupRepository;
 import com.ua.schoolboard.persistence.repos.UserRepository;
 import com.ua.schoolboard.rest.model.*;
@@ -26,7 +27,8 @@ public class GroupService {
     private final UserRepository userRepository;
     private final GroupRepository repository;
 
-    public void createNewGroup(GroupTO groupTO) {
+    public void createNewGroup(GroupTO groupTO) throws CustomException {
+        groupTO.setActive(true);
         GroupBO groupBO = mapper.toGroupBO(groupTO);
         repository.createNewGroup(groupBO);
     }
@@ -44,14 +46,20 @@ public class GroupService {
 
     }
 
-    public List<GroupTO> listByTeacher(Long teacherId) {
+    public List<GroupTO> listByTeacher(Long teacherId) throws CustomException {
         List<GroupBO> groupBOS = repository.listByTeacher(teacherId);
         return mapper.toGroupTOs(groupBOS);
     }
 
-    public GroupTO updateGroup(GroupTO groupTO) {
+    public GroupTO updateGroup(GroupTO groupTO) throws CustomException {
         GroupBO groupBO = mapper.toGroupBO(groupTO);
         return mapper.toGroupTO(repository.update(groupBO));
+    }
+
+    public List<GroupTO> listOfActive() {
+        List<GroupBO> groupBOS = repository.listOfGroupBO();
+        List<GroupBO> activeGroups = groupBOS.stream().filter(GroupBO::isActive).collect(Collectors.toList());
+        return mapper.toGroupTOs(activeGroups);
     }
 
     public List<GroupTO> getAll() {
@@ -60,33 +68,34 @@ public class GroupService {
     }
 
     //TODO add students to group instead of setting them every time
-    public void assignUserToGroup(GroupTO groupTO, Long userId) {
+    public void assignUserToGroup(GroupTO groupTO, Long userId) throws CustomException {
         UserBO userBO = userRepository.findUserById(userId);
-       /* if (userBO.getRole().equals(Role.STUDENT)) {
+        if (userBO.getRole().equals(Role.STUDENT)) {
             UpdateStudentTO updateStudentTO = userMapper.toStudentTO(userBO);
-            if (!groupTO.getStudents().isEmpty()) {
                 groupTO.getStudents().add(updateStudentTO);
-            } else {
-                groupTO.setStudents(Collections.singletonList(updateStudentTO));
-            }
         } else if (userBO.getRole().equals(Role.TEACHER)) {
             UpdateTeacherTO updateTeacherTO = userMapper.toTeacherTO(userBO);
             groupTO.setTeacher(updateTeacherTO);
         } else {
             //TODO this is a stub for further development of other possible roles
-        }*/
-        userBO.getRole().updateUser(groupTO, userBO, userMapper::toTeacherTO, userMapper::toStudentTO);
+        }
+        //userBO.getRole().updateUser(groupTO, userBO, userMapper::toTeacherTO, userMapper::toStudentTO);
         repository.assignUserToGroup((mapper.toGroupBO(groupTO)));
     }
 
-    public GroupTO getGroupByName(String groupName) {
+    public GroupTO getGroupByName(String groupName) throws CustomException {
         GroupBO groupByName = repository.getGroupByName(groupName);
         return mapper.toGroupTO(groupByName);
 
     }
 
-    public GroupTO getGroupById(long groupId) {
+    public GroupTO getGroupById(long groupId) throws CustomException {
         GroupBO groupById = repository.getGroupById(groupId);
         return mapper.toGroupTO(groupById);
+    }
+
+    public void disableGroup(GroupTO groupTO) throws CustomException {
+        groupTO.setActive(false);
+        repository.disableGroup(mapper.toGroupBO(groupTO));
     }
 }

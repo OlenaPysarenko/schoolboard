@@ -1,10 +1,7 @@
 package com.ua.schoolboard.rest.model;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -12,7 +9,7 @@ import java.util.List;
 public class UpdateAdminTO extends UserTO {
     private String name;
     private String birthDay;
-    private List<RatesTO> rates = new ArrayList<>();
+    private List<RatesTO> rates;
     private BalanceTO balance;
 
     public void updateBalance(Integer sum) {

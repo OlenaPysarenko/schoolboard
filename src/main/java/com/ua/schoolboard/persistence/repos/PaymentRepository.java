@@ -14,4 +14,8 @@ public class PaymentRepository {
     public PaymentBO register(PaymentBO paymentBO){
        return entityMapper.toPaymentBO(paymentRepo.save(entityMapper.toPaymentEntity(paymentBO)));
     }
+
+    public PaymentBO getPaymentById(long paymentId){
+        return entityMapper.toPaymentBO(paymentRepo.findById(paymentId).get());
+    }
 }

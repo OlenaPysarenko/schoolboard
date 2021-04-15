@@ -47,6 +47,17 @@ public enum Role {
             //stub
         }
     };
+ /*   SCHOOL{
+        @Override
+        public UserTO newUser() {
+            return new School();
+        }
+
+        @Override
+        public void updateUser(GroupTO group, UserBO user, Function<UserBO, UpdateTeacherTO> teacherMapper, Function<UserBO, UpdateStudentTO> studentMapper) {
+
+        }
+    };*/
 
     public abstract UserTO newUser();
 

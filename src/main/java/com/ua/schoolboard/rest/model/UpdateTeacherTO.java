@@ -1,10 +1,10 @@
 package com.ua.schoolboard.rest.model;
 
-import com.ua.schoolboard.persistence.model.GroupEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Data
 //@EqualsAndHashCode(callSuper = true)
@@ -16,9 +16,9 @@ public class UpdateTeacherTO extends UserTO {
     private String nickname;
     private Date birthDay;
     private String phoneNumber;
-    private Set<Language> languages = new HashSet<>();
+    private Set<Language> languages;
     private BalanceTO balance;
-    private List<TeacherRatesTO> rates = new ArrayList<>();
+    private List<TeacherRatesTO> rates;
     private boolean active;
 
      public void updateBalance(Integer sum) {

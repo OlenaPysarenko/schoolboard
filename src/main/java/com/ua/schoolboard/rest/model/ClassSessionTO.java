@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 
 public class ClassSessionTO {
-    private int classId;
+    private long classId;
     private GroupTO group;
     private UpdateTeacherTO teacher;
     private List<UpdateStudentTO> students = new ArrayList<>();

@@ -1,6 +1,7 @@
 package com.ua.schoolboard.persistence.repos;
 
 
+import com.ua.schoolboard.exceptions.CustomException;
 import com.ua.schoolboard.persistence.mappers.RatesEntityMapper;
 import com.ua.schoolboard.persistence.model.RatesEntity;
 import com.ua.schoolboard.rest.model.Language;
@@ -34,7 +35,7 @@ public class RatesRepository {
         ratesRepo.save(ratesEntity);
     }
 
-    public void findRatesByLanguage(Language language) {
+    public void findRatesByLanguage(Language language) throws CustomException {
         ratesRepo.findByLanguage(language).orElseThrow(getSupplierException(RATES_NOT_FOUND));
     }
 
@@ -50,7 +51,7 @@ public class RatesRepository {
         return ratesEntityMapper.toRatesBOs(ratesEntities);
     }
 
-    public RatesBO findByLangAndDescription(Language language, String rateDescription) {
+    public RatesBO findByLangAndDescription(Language language, String rateDescription) throws CustomException {
         RatesEntity ratesEntity = ratesRepo.findByLanguageAndRateDescription(language, rateDescription).orElseThrow(getSupplierException(RATES_NOT_FOUND));
         return ratesEntityMapper.toRatesBO(ratesEntity);
     }
@@ -59,7 +60,7 @@ public class RatesRepository {
         List<RatesEntity> allByRole = ratesRepo.findAllByRole(role);
         return ratesEntityMapper.toRatesBOs(allByRole);
     }
-     public RatesBO getByRoleAndLang(Role role, Language language){
+     public RatesBO getByRoleAndLang(Role role, Language language) throws CustomException {
          RatesEntity ratesEntity = ratesRepo.findByLanguageAndRole(language, role).orElseThrow(getSupplierException(RATES_NOT_FOUND));
          return ratesEntityMapper.toRatesBO(ratesEntity);
      }

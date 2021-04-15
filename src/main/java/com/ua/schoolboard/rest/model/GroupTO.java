@@ -1,7 +1,6 @@
 package com.ua.schoolboard.rest.model;
 
 import com.ua.schoolboard.persistence.Duration;
-import com.ua.schoolboard.persistence.model.ClassSessionEntity;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -19,6 +18,8 @@ public class GroupTO {
     private List<UpdateStudentTO> students = new ArrayList<>();
     private UpdateTeacherTO teacher;
     private List<ClassSessionTO> classesCovered = new ArrayList<>();
+    private boolean active;
+
 
     @Override
     public String toString() {
@@ -33,6 +34,7 @@ public class GroupTO {
                 ", students=" + students +
                 ", teacher=" + teacher +
                 ", classesCovered=" + classesCovered.size() +
+                ", active=" + active +
                 '}';
     }
 }

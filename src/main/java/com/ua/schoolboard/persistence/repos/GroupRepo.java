@@ -22,4 +22,6 @@ public interface GroupRepo extends CrudRepository<GroupEntity, Long> {
 
     List<GroupEntity> findAllByTeacher(UserEntity teacher);
 
+    Optional<GroupEntity> deleteByGroupId(Long groupId);
+
 }

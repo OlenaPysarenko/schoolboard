@@ -8,13 +8,32 @@
 </head>
 <body>
 Edit your profile
-<form action="#" th:action="@{/user/adminEdit}"  method="post">
+<form action="#" th:action="@{/user/adminEdit}" method="post">
     <div><label> Name <input type="text" th:value="${updUser.name}" name="username"/></label></div>
     <input type="hidden" th:value="${userId}" name="userId">
     <div><label> Password<input type="text" th:value="${updUser.getPassword()}" name="password"/></label></div>
-    <div><label> Birthday<input type="text" th:value="${updUser.getBirthDay()}" name="birthday"/></label></div>
+    Birthday
+    <div class="row" style="padding-top: 100px">
+        <div class="col">
+            <input data-date-format="dd/mm/yyyy" th:value="${updUser.getBirthDay()}" name="birthDay" id="datepicker">
+        </div>
+    </div>
     <div><label> Balance<input type="text" th:value="${updUser.getBalance()}" name="balance"/></label></div>
     <button type="submit">Save</button>
 </form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $('#datepicker').datepicker({
+        weekStart: 1,
+        daysOfWeekHighlighted: "6,0",
+        autoclose: true,
+        todayHighlight: true,
+    });
+    $('#datepicker').datepicker("setDate", new Date());
+</script>
 </body>
 </html>

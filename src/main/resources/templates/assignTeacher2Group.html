@@ -18,12 +18,10 @@ Assign Teacher to Group
 
 <form action="#" th:action="@{'/assignTeacher2Group/'+${userId}+'/'+${group.getGroupId()}}" method="post">
     <div>
-
         <select name="teacherId"/>
         <option th:each="teacher:${teachers}" th:value="${teacher.getUserId()}"
                 th:text="${teacher.getName()}+' '+ ${teacher.getSurname()}"/>
         </select>
-
         <button type="submit">Assign</button>
     </div>
 </form>

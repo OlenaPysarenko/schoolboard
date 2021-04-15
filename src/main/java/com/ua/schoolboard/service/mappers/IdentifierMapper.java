@@ -7,6 +7,6 @@ import org.mapstruct.Mapping;
 
 @Mapper
 public interface IdentifierMapper {
-    @Mapping(target = "rates", qualifiedBy = UserInfo.class)
+    @Mapping(target = "rates")
     UpdateTeacherTO map(UserBO source);
 }

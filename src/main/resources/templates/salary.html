@@ -11,7 +11,7 @@
     <table>
         <td th:text="${teacher.getName()}"></td>
         <td th:text="${teacher.getSurname()}"></td>
-        <td th:text="${teacher.getBalance().getAmount()}"></td>
+        <td th:unless="${salary eq null}" th:text="${salary}"></td>
     </table>
 </form>
 </body>

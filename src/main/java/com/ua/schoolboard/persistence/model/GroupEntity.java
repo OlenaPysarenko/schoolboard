@@ -39,12 +39,31 @@ public class GroupEntity {
     private Duration duration;
 
     @OneToMany
-    private List<UserEntity> students =  new ArrayList<>();
+    private List<UserEntity> students = new ArrayList<>();
 
     @ManyToOne
     private UserEntity teacher;
 
-    @OneToMany
-    private List<ClassSessionEntity> classesCovered =  new ArrayList<>();
+     @OneToMany(fetch = FetchType.EAGER, mappedBy = "group")
+    private List<ClassSessionEntity> classesCovered = new ArrayList<>();
 
+    @Column
+    private boolean active;
+
+    @Override
+    public String toString() {
+        return "GroupEntity{" +
+                "groupId=" + groupId +
+                ", groupType=" + groupType +
+                ", groupName='" + groupName + '\'' +
+                ", language=" + language +
+                ", lvl=" + lvl +
+                ", bookName='" + bookName + '\'' +
+                ", duration=" + duration +
+                ", students=" + students +
+                ", teacher=" + teacher +
+                ", classesCovered=" + classesCovered.size() +
+                ", active=" + active +
+                '}';
+    }
 }

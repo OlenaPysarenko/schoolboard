@@ -12,24 +12,13 @@ Assign Teacher to Rates
     <div>
         <table border="thick">
             <tr>
-                <td><select name="name"/>
-                    <option th:each="user:${users}" th:value="${user.getName()}" th:text="${user.getName()}"></option>
-                    </select> </td>
-                <td><select name="surname"/>
-                    <option th:each="user:${users}"  th:value="${user.getSurname()}"
-                            th:text="${user.getSurname()}"></option>
-                    </select> </td>
-                <!--input type="hidden" th:value="${user.getUserId()}" name="userId"/-->
-                <td><select name="language"/>
-                    <option th:each="rate:${rates}" th:value="${rate.getLanguage()}"
-                            th:text="${rate.getLanguage()}"></option>
-                    </select>
-                </td>
-                <!--td><select name="rateDescription"/>
-                    <option th:each="rate:${rates}" th:value="${rate.getRateDescription()}"
-                            th:text="${rate.getRateDescription()}"></option>
-                    </select>
-                </td-->
+                <td><select name="teacherId"/>
+                    <option th:each="teacher:${teachers}" th:value="${teacher.getUserId()}"
+                            th:text="${teacher.getName()}+' '+ ${teacher.getSurname()}"/>
+                    </select></td>
+            <td><select name="language">
+                <option th:each="language : ${languages}" th:value="${language}" th:text="${language}"></option>
+            </select></td></tr>
             </tr>
         </table>
     </div>

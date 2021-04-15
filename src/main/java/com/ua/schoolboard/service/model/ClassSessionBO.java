@@ -1,8 +1,5 @@
 package com.ua.schoolboard.service.model;
 
-import com.ua.schoolboard.persistence.Hometask;
-import com.ua.schoolboard.persistence.model.UserEntity;
-import com.ua.schoolboard.service.model.GroupBO;
 import lombok.Data;
 
 import java.util.ArrayList;

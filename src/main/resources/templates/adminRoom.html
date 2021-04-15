@@ -11,5 +11,6 @@ Admin's room
 <form action="#" th:action="@{'/adminRoom/'+${user.userId}}" method="post"></form>
 <a th:href="@{'/allTeachers/'+${user.userId}}"> View all teachers </a>
 <a th:href="@{'/newPayment/'+${user.userId}}"> Create new payment </a>
+<a th:href="@{'/newTeacherPayment/'+${user.userId}}"> Get a salary  </a>
 </body>
 </html>
