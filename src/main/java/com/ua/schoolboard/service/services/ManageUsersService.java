@@ -1,9 +1,12 @@
 package com.ua.schoolboard.service.services;
 
+import com.ua.schoolboard.exceptions.CustomException;
 import com.ua.schoolboard.persistence.repos.RatesRepository;
 import com.ua.schoolboard.persistence.repos.UserManagementRepository;
 import com.ua.schoolboard.persistence.repos.UserRepository;
-import com.ua.schoolboard.rest.model.*;
+import com.ua.schoolboard.rest.model.RatesTO;
+import com.ua.schoolboard.rest.model.UpdateStudentTO;
+import com.ua.schoolboard.rest.model.UpdateTeacherTO;
 import com.ua.schoolboard.service.mappers.RatesMapper;
 import com.ua.schoolboard.service.mappers.UserMapper;
 import com.ua.schoolboard.service.model.RatesBO;
@@ -14,9 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 
-import static com.ua.schoolboard.exceptions.ErrorCode.RATES_NOT_FOUND;
-import static com.ua.schoolboard.exceptions.ExceptionUtil.getException;
-
 @Service
 @RequiredArgsConstructor
 public class ManageUsersService {
@@ -26,24 +26,19 @@ public class ManageUsersService {
     private final RatesRepository ratesRepository;
     final private UserManagementRepository userManagementRepository;
 
-    //TODO add field active to User
-/*    public void getAllActiveUsersByLang(Language language){
-        UserBO byLanguage = userRepository.findByLanguage(language);
-    }*/
-    public void assignStudentsToRates(UpdateStudentTO studentTO, RatesTO ratesTO) {
-        //UserBO userById = userRepository.getStudentByNameAndSurname(studentTO.getName(), studentTO.getSurname());
+    public void assignStudentsToRates(UpdateStudentTO studentTO, RatesTO ratesTO) throws CustomException {
+        UserBO studentByNameAndSurname = userRepository.getStudentByNameAndSurname(studentTO.getName(), studentTO.getSurname());
         RatesBO ratesBO = ratesMapper.toRatesBO(ratesTO);
-        UserBO userBO = userMapper.toUserBO(studentTO);
-        userBO.setRates(Collections.singletonList(ratesBO));
-        userManagementRepository.assignUserToRates(userBO);
+        studentByNameAndSurname.setRates(Collections.singletonList(ratesBO));
+        userManagementRepository.assignUserToRates(studentByNameAndSurname);
     }
 
-    public void assignTeacherToRates(UpdateTeacherTO teacherTO, RatesTO ratesTO) {
-        UserBO userById = userRepository.getStudentByNameAndSurname(teacherTO.getName(), teacherTO.getSurname());
+    public void assignTeacherToRates(UpdateTeacherTO teacherTO, RatesTO ratesTO) throws CustomException {
+        UserBO userById = userRepository.findUserById(teacherTO.getUserId());
         RatesBO ratesBO = ratesMapper.toRatesBO(ratesTO);
-        userById.setRates(Collections.singletonList(ratesBO));
+        List<RatesBO> rates = userById.getRates();
+        rates.add(ratesBO);
+        userById.setRates(rates);
         userManagementRepository.assignUserToRates(userById);
     }
-
-
 }
